@@ -1,2 +1,2 @@
-# bucket
-Make your bucket list and meet friends
+# Project 2
+The second project
