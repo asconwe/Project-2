@@ -4,8 +4,8 @@ var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var exphbs = require("express-handlebars");
 //==============Local dependencies
-var db = require("./models");
-var controller = require('./controllers/controller') // Name controllers accordingly
+// var db = require("./models");
+var controller = require('./controllers/controller')
 
 //============== Name our server
 var app = express();
@@ -25,14 +25,16 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(methodOverride("_method"));
 
+//============== Start all controllers
+console.log('serv.js', app);
 controller(app);
 
 //============== Set PORT
 var PORT = process.env.PORT || 3000;
 
 //============== Sync database and start server
-db.sequelize.sync({ force: true }).then(function() {
+// db.sequelize.sync({ force: true }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
-});
+// });
