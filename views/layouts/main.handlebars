@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,21 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>BuckIt</title>
 </head>
+
 <body>
+    <div class="background-container">
+        <img src="/images/scuba.jpg" alt="" class="bkg">
+    </div>
     <div class="container">
         <div class="header {{style}}">
-            <a class="logo {{style}}" href="/profile"><h1>BuckIt</h1><span class="check {{style}}">&#10004;</span></a>
-            <h3 class="subtext {{style}}"><span>Achieve your goals with friends</span></h3>
+            <div class="brand {{style}}">
+                <a class="logo {{style}}" href="/profile">
+                    <h1>BuckIt</h1><span class="check {{style}}">&#10004;</span></a>
+                <h3 class="subtext {{style}}"><span>Do stuff / Make friends</span></h3>
+            </div>
         </div>
     </div>
     <div class="container">{{{body}}}</div>
 </body>
+
 </html>
