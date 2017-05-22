@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Activity = sequelize.define("Activity", {
-    itemname: {
+    itemName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
