@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,24 @@
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Roboto:100,300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/{{style}}.css">
     <title>BuckIt</title>
 </head>
+
 <body>
-    <div class="header">
-        <a href="/profile">
-            <span class="logo">
-                BuckIt
-            </span>
-        </a>
+    <div class="background-container">
+        <img src="/images/scuba.jpg" alt="" class="bkg">
     </div>
+    <div class="header {{style}}">
+        <div class="container {{style}}">
+            <div class="brand {{style}}">
+                <a class="logo {{style}}" href="/profile?username={{profile.username}}">
+                    <h1>BuckIt</h1><span class="check {{style}}">&#10004;</span></a>
+                <h3 class="subtext {{style}}"><span>Do&nbsp;stuff&nbsp;--> Make&nbsp;friends</span></h3>
+            </div>
+        </div>
+    </div>
+    <div class="container {{style}}">{{{body}}}</div>
 </body>
+
 </html>

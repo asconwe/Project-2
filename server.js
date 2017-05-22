@@ -1,4 +1,5 @@
 //============== Dependencies
+require('dotenv').config({path: './.env'});
 var express = require('express');
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
