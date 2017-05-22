@@ -28,6 +28,14 @@ body {
     text-decoration: none;
 }
 
+.logo>h1 {
+    display: inline;
+}
+
+.subtext {
+    text-transform: uppercase;
+}
+
 .inpt {
     font-size: 1.2em;
     background: white;
@@ -38,98 +46,7 @@ body {
     font-weight: 500;
 }
 
-.inpt.button {
-    width: 90px;
-    background-color: #efffef;
-    color: #777;
-}
 
-.inpt.button:hover {
-    background-color: white;
-    color: gold;
-}
-
-.inpt.text {
-    font-weight: 300;
-    width: 180px;
-    color: grey;
-}
-
-.brand.landing {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    margin-left: -180px;
-    margin-right: auto;
-    width: 380px;
-    /*padding-left: 20px;*/
-}
-
-.logo.landing {
-    color: white;
-    font-size: 5em;
-    line-height: 0;
-}
-
-.logo.landing>h1 {
-    display: inline;
-}
-
-.check.landing {
-    position: absolute;
-    font-size: 0.7em;
-    border: solid white 2px;
-    border-radius: 2px;
-    height: 25px;
-    width: 25px;
-    margin-left: 40px;
-    top: -5px;
-    padding: 5px 6px 2px 1px;
-}
-
-.subtext.landing {
-    font-size: 2.3em;
-    line-height: 2em;
-    color: white;
-    font-weight: 100;
-}
-
-.entry-fields {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    width: 400px;
-    margin-left: -200px;
-    padding-top: 115px;
-    text-align: center;
-}
-
-.login, .sign-up {
-    border: solid 1px white;
-    color: white;
-    margin: 20px;
-    padding: 10px;
-}
-
-.sign-up-a {
-    color: white;
-}
-
-.sign-up-a:hover {
-    color: gold;
-}
-
-.login>h3, .login>form, .sign-up>h3 {
-    display: inline;
-}
-
-.login>h3>.label {
-    padding-right: 10px;
-}
-
-.sign-up>h3>.label {
-    padding-right: 67px;
-}
 
 /*============MEDIA=QUERIES===========================*/
 /*Extra-small screens*/
@@ -137,53 +54,6 @@ body {
     .container {
         width: 100%;
         padding: 0;
-    }
-
-    .brand.landing {
-        width: 280px;
-        margin-left: -130px;
-    }
-
-    .logo.landing {
-        font-size: 3.5em;
-    }
-
-    .check.landing {
-        height: 17px;
-        width: 17px;
-        margin-left: 30px;
-        top: -5px;
-        padding: 5px 6px 2px 1px;
-    }
-
-    .subtext.landing {
-        font-size: 1.65em;
-        width: 280px;
-    }
-
-    .entry-fields {
-        width: 320px;
-        margin-left: -160px;
-    }
-
-    .login>h3>.label {
-        padding-right: 5px;
-    }
-
-    .sign-up>h3>.label {
-        padding-right: 7px;
-    }
-
-    .inpt {
-        font-size: 1em;
-    }
-
-    .inpt.button {
-        width: 70px; 
-    }
-
-    .inpt.text {
-        width: 125px;
     }
 }
 
@@ -232,16 +102,5 @@ body {
     .bkg {
         width: auto;
         height: 100%;
-    }
-}
-
-@media (orientation: landscape) and (max-height: 550px) {
-    .brand.landing {
-        top: 50px;
-    }
-
-    .entry-fields {
-        top: 50px;
-        padding-top: 100px; 
     }
 }
