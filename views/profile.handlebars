@@ -1,25 +1,29 @@
 <div class="menu">
-    <button id="add-activity">Add something to your bucket list! +</button>
+    <button id="add-activity" class="add-new bttn"><span class="plus">+</span><span class="text">Add to your bucket list!</span></button>
+    <button id="add-activity" class="browse bttn"><span class="text">Browse activities by tag</span></button>
 </div>
 <div class="bucket-list">
-    <h2>{{profile.username}}</h2>
-    <h1 class="banner">My BuckIt List</h1>
-    <h2 class="category">Open activities</h2>
-    {{#each profile.activity}}
-        {{#unless this.complete}}
-            <div class="activity open">
-                <h3 class="activity-name">{{this.itemName}}</h3>
-                <h4 class="activity-location">{{this.location}}</h4>
-            </div>
-        {{/unless}}
-    {{/each}}
-    <h2 class="category">Completed activities</h2>
-    {{#each profile.activity}}
-        {{#if this.complete}}
-            <div class="activity complete">
-                <h3 class="activity-name">{{this.itemName}}</h3>
-                <h4 class="activity-location">{{this.location}}</h4>
-            </div>
-        {{/if}}
-    {{/each}}
+    <h2 class="banner">My BuckIt List</h2>
+    <div class="category-box">
+        <h3 class="category">Open activities</h3>
+        {{#each profile.activity}}
+            {{#unless this.complete}}
+                <div class="activity open">
+                    <h3 class="activity-name">{{this.itemName}}</h3>
+                    <h4 class="activity-location">{{this.location}}</h4>
+                </div>
+            {{/unless}}
+        {{/each}}
+    </div>
+    <div class="category-box">
+        <h3 class="category">Completed activities</h3>
+        {{#each profile.activity}}
+            {{#if this.complete}}
+                <div class="activity complete">
+                    <h3 class="activity-name">{{this.itemName}}</h3>
+                    <h4 class="activity-location">{{this.location}}</h4>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
 </div>

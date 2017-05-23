@@ -1,3 +1,20 @@
+/* h1 is the BuckIt logo */
+
+h2 {
+    font-size: 3em;
+    font-weight: 300;
+}
+
+h3 {
+    font-size: 2em;
+    font-weight: 300;
+}
+
+h4 {
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
 .container.profile {
     position: relative;
 }
@@ -39,7 +56,48 @@
     padding: 0 2px 2px 0;
 }
 
+
+.bttn {
+    margin: 10px 0;
+    position: relative;
+    background: none;
+    color: white;
+    border: solid 2px white;
+    border-radius: 5px;
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 5px;
+    padding: 20px 15px;
+}
+
+.bttn:hover {
+    background: rgba(0, 0, 255, 0.1);
+}
+
+.add-new>.text {
+    margin-left: 40px;
+}
+
+.add-new>.plus {
+    position: absolute;
+    top: 22px;
+    font-size: 1.9em;
+    line-height: 0;
+}
+
+.bucket-list {
+    font-weight: 100;
+}
+
+.category-box {
+    position: relative;
+    margin: 15px 0;
+    padding: 15px;
+    background: #99f;
+}
+
 .activity {
+
     margin: 15px 0;
     padding: 15px;
     background: rgba(255, 255, 255, 0.8);  
