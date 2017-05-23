@@ -7,6 +7,34 @@
         </form>
     </div>
     <div class="sign-up">
-        <h3><span class="label">Don't have an accout yet?</span><a id="sign-up-button" class="sign-up-a" href="#">Sign up!</a></h3>
+        <h3><span class="label">Don't have an account yet?</span><a id="sign-up-button" class="sign-up-a" data-target="#signupmod">Sign up!</a></h3>
+    </div>
+</div>
+
+<!--sign up form-->
+<div id="signupmod" class="modal">
+    <div class="modal-content">
+      <form id="signupform">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <br>
+          <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter your email">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <br>
+          <input type="text" class="form-control" id="fullName" aria-describedby="..." placeholder="Please enter Full Name">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="lastname">Username</label>
+          <br>
+          <input type="text" class="form-control" id="username" aria-describedby="..." placeholder="Choose a Username">
+        </div>
+        <br>
+      <button type="submit" id="submit">Join BuckIt <span style="font-family: wingdings; font-size: 200%;">&#252;</span></button>
+      <button type="submit" id= "close">Cancel</button>
+      </form>
     </div>
 </div>
