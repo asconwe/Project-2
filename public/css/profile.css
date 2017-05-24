@@ -16,7 +16,7 @@ h4 {
 }
 
 .bkg {
-    display: none;
+    opacity: 0.4;
 }
 
 .container.profile {

@@ -1,7 +1,7 @@
 <div class="entry-fields">
     <div class="login">
         {{#if authFailed}}
-        <p class="authFailed">That username did not match any in our database</p>
+        <p class="auth-failed">That username did not match any in our database</p>
         {{/if}}
         <h3><span class="label">Login:</span></h3>
         <form id="login-form" action="/profile">
@@ -10,34 +10,34 @@
         </form>
     </div>
     <div class="sign-up">
-        <h3><span class="label">Don't have an account yet?</span><a id="sign-up-button" class="sign-up-a" data-target="#signupmod">Sign up!</a></h3>
+        <h3><span class="label">Don't have an account yet?</span><a id="modal-button" class="sign-up-a" data-target="#signupmod">Sign up!</a></h3>
     </div>
 </div>
 
 <!--sign up form-->
-<div id="signupmod" class="modal">
+<div id="modal" class="modal">
     <div class="modal-content">
       <form id="signupform" class="modal-form">
-        <div class="lbl-inpt">
+        <div class="modal-inpt">
           <label for="email">Email</label>
           <br>
           <input type="email" class="inpt" id="userEmail" placeholder="Enter your email">
         </div>
         <br>
-        <div class="lbl-inpt">
+        <div class="modal-inpt">
           <label for="fullname">Full Name</label>
           <br>
           <input type="text" class="inpt" id="fullName" placeholder="Please enter Full Name">
         </div>
         <br>
-        <div class="lbl-inpt">
+        <div class="modal-inpt">
           <label for="lastname">Username</label>
           <br>
           <input type="text" class="inpt" id="username" placeholder="Choose a Username">
         </div>
         <br>
-      <button type="submit" id="submit" class="inpt bttn wide">Join BuckIt &#10004;</span></button>
-      <button type="submit" id="close" class="inpt bttn">Cancel</button>
+      <button type="submit" id="submit" class="inpt modal-bttn wide">Join BuckIt &#10004;</span></button>
+      <button type="submit" id="close" class="inpt modal-bttn">Cancel</button>
       </form>
     </div>
 </div>
