@@ -6,21 +6,6 @@ function getUserProfile(username, callback) {
     db.Person.findOne({ where: { username: username }, include: [db.Activity] }).then(function (profile) { 
         callback(profile);
     })
-    // var profile = {
-    //     username: username,
-    //     activity: [
-    //         {
-    //             itemName: 'Go skydiving',
-    //             location: 'Virginia',
-    //             complete: false
-    //         },
-    //         {
-    //             itemName: 'Go Bungee Jumping',
-    //             location: 'Virginia',
-    //             complete: true
-    //         }
-    //     ]
-    // } // this would come fromt he sequelize query
 }
 
 module.exports = function (app) {
@@ -29,11 +14,17 @@ module.exports = function (app) {
         // /profile?username=asdl
         var username = req.query.username;
         getUserProfile(username, function (profile) {
-            console.log('in callback')
-            res.render('profile', {
-                style: 'profile',
-                profile: profile
-            });
+            if (profile == null) {
+                res.render('index', {
+                    style: 'landing',
+                    authFailed: true
+                })
+            } else {
+                res.render('profile', {
+                    style: 'profile',
+                    profile: profile
+                });
+            }
         })
     });
 }

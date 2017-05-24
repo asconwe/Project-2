@@ -1,9 +1,12 @@
 <div class="entry-fields">
     <div class="login">
+        {{#if authFailed}}
+        <p class="authFailed">That username did not match any in our database</p>
+        {{/if}}
         <h3><span class="label">Login:</span></h3>
         <form id="login-form" action="/profile">
             <input class="inpt text" type="text" name="username" placeholder="Username">
-            <input class="inpt button" type="submit" value="Go!">
+            <input class="inpt bttn" type="submit" value="Go!">
         </form>
     </div>
     <div class="sign-up">
@@ -14,27 +17,27 @@
 <!--sign up form-->
 <div id="signupmod" class="modal">
     <div class="modal-content">
-      <form id="signupform">
-        <div class="form-group">
+      <form id="signupform" class="modal-form">
+        <div class="lbl-inpt">
           <label for="email">Email</label>
           <br>
-          <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter your email">
+          <input type="email" class="inpt" id="userEmail" placeholder="Enter your email">
         </div>
         <br>
-        <div class="form-group">
+        <div class="lbl-inpt">
           <label for="fullname">Full Name</label>
           <br>
-          <input type="text" class="form-control" id="fullName" aria-describedby="..." placeholder="Please enter Full Name">
+          <input type="text" class="inpt" id="fullName" placeholder="Please enter Full Name">
         </div>
         <br>
-        <div class="form-group">
+        <div class="lbl-inpt">
           <label for="lastname">Username</label>
           <br>
-          <input type="text" class="form-control" id="username" aria-describedby="..." placeholder="Choose a Username">
+          <input type="text" class="inpt" id="username" placeholder="Choose a Username">
         </div>
         <br>
-      <button type="submit" id="submit">Join BuckIt <span style="font-family: wingdings; font-size: 200%;">&#252;</span></button>
-      <button type="submit" id= "close">Cancel</button>
+      <button type="submit" id="submit" class="inpt bttn wide">Join BuckIt &#10004;</span></button>
+      <button type="submit" id="close" class="inpt bttn">Cancel</button>
       </form>
     </div>
 </div>

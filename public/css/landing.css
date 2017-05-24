@@ -1,10 +1,18 @@
-.inpt.button {
+.authFailed {
+    text-align: left;
+    font-size: 0.85em;
+    color: red;
+    text-shadow: 2px white;
+    padding-bottom: 7px;
+}
+
+.inpt.bttn {
     width: 90px;
     background-color: #efffef;
     color: #777;
 }
 
-.inpt.button:hover {
+.inpt.bttn:hover {
     background-color: white;
     color: gold;
 }
@@ -129,7 +137,7 @@
         font-size: 1em;
     }
 
-    .inpt.button {
+    .inpt.bttn {
         width: 70px; 
     }
 
