@@ -6,7 +6,7 @@ module.exports = function(app) {
     activity.complete = false;
     db.Activity.create(activity).then(function(dbActivity) {
         console.log(dbActivity.id);
-        db.UserAndActivity.create({ ActivityId: dbActivity.id, PersonId: req.body.PersonId }).then(function(userAndActivity){                     
+        db.JoinedActivity.create({ ActivityId: dbActivity.id, PersonId: req.body.PersonId }).then(function(userAndActivity){                     
           res.json(dbActivity);
         });
       });

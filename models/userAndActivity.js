@@ -1,15 +1,15 @@
 module.exports = function(sequelize, DataTypes) {
-  var UserAndActivity = sequelize.define("UserAndActivity", {
+  var JoinedActivity = sequelize.define("JoinedActivity", {
    
   },
     {
       classMethods: {
         associate: function(models) {
-          UserAndActivity.belongsTo(models.Person);
-          UserAndActivity.belongsTo(models.Activity);
+          JoinedActivity.belongsTo(models.Person);
+          JoinedActivity.belongsTo(models.Activity);
           
         }
       }
     });
-  return UserAndActivity;
+  return JoinedActivity;
 };
