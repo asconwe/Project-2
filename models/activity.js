@@ -19,27 +19,18 @@ module.exports = function(sequelize, DataTypes) {
     },
     complete: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
       default: false
     },
-    completeCount: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      default: 0
-    },
-    wantFriend: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      default: true
-    },
-    location: {
+     location: {
       type: DataTypes.STRING
     }
   },
     {
       classMethods: {
         associate: function(models) {
-          Activity.belongsToMany(models.Person, {through: 'friends', foreignKey: "activityid"});
+//           Activity.belongsToMany(models.Person, {through: 'friends', foreignKey: "activityid"});
+          Activity.belongsTo(models.Person);
+          Activity.hasMany(models.UserAndActivity);
         }
       }
     });
