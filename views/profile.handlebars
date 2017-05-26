@@ -6,56 +6,65 @@
     <h2 class="banner">My BuckIt List</h2>
     <div class="category-box">
         <h3 class="category">Open activities</h3>
-        {{#each profile.activity}}
-            {{#unless this.complete}}
-                <div class="activity open">
-                    <h3 class="activity-name">{{this.itemName}}</h3>
-                    <h4 class="activity-location">{{this.location}}</h4>
-                </div>
-            {{/unless}}
-        {{/each}}
+        {{#each profile.Activities}} {{#unless this.complete}}
+        <div class="activity open">
+            <h3 class="activity-name">{{this.itemName}}</h3>
+            <h4 class="activity-location">{{this.location}}</h4>
+        </div>
+        {{/unless}} {{/each}}
+        {{#each profile.joinedActivities}} {{#unless this.complete}}
+        <div class="activity open">
+            <h3 class="activity-name">{{this.itemName}}</h3>
+            <h4 class="activity-location">{{this.location}}</h4>
+        </div>
+        {{/unless}} {{/each}}
     </div>
     <div class="category-box">
         <h3 class="category">Completed activities</h3>
-        {{#each profile.activity}}
-            {{#if this.complete}}
-                <div class="activity complete">
-                    <h3 class="activity-name">{{this.itemName}}</h3>
-                    <h4 class="activity-location">{{this.location}}</h4>
-                </div>
-            {{/if}}
-        {{/each}}
+        {{#each profile.Activities}} {{#if this.complete}}
+        <div class="activity complete">
+            <h3 class="activity-name">{{this.itemName}}</h3>
+            <h4 class="activity-location">{{this.location}}</h4>
+        </div>
+        {{/if}} {{/each}}
+        {{#each profile.joinedActivites}} {{#if this.complete}}
+        <div class="activity complete">
+            <h3 class="activity-name">{{this.itemName}}</h3>
+            <h4 class="activity-location">{{this.location}}</h4>
+        </div>
+        {{/if}} {{/each}}
     </div>
 </div>
 <!--sign up form-->
 <div id="modal" class="modal">
     <div class="modal-content">
-      <form id="addactivityform" class="modal-form">
-        <div class="modal-inpt">
-          <label for="activity">What is your activity?</label>
-          <br>
-          <input type="text" class="inpt" id="activity" placeholder="Your activity">
-        </div>
-        <br>
-        <div class="modal-inpt">
-          <label for="location">Location</label>
-          <br>
-          <input type="text" class="inpt" id="location" placeholder="City, State">
-        </div>
-        <br>
-        <div class="modal-inpt">
-          <label for="tags">Tags</label>
-          <br>
-          <input type="text" class="inpt" id="tags" placeholder="Comma separated">
-        </div>
-        <div class="modal-inpt">
-          <label for="Description">description</label>
-          <br>
-          <input type="text-area" class="inpt" id="description" placeholder="Short description of your BuckIt activity">
-        </div>
-        <br>
-      <button type="submit" id="submit" class="inpt modal-bttn wide">Add to BuckIt &#10004;</span></button>
-      <button type="submit" id="close" class="inpt modal-bttn">Cancel</button>
-      </form>
+        <form id="addactivityform" class="modal-form" action="/api/activity/new" method="POST">
+            <div class="modal-inpt">
+                <label for="itemName">What is your activity?</label>
+                <br>
+                <input type="text" class="inpt" name="itemName" placeholder="Your activity">
+            </div>
+            <br>
+            <div class="modal-inpt">
+                <label for="location">Location</label>
+                <br>
+                <input type="text" class="inpt" name="location" placeholder="City, State">
+            </div>
+            <br>
+            <div class="modal-inpt">
+                <label for="tags">Tags</label>
+                <br>
+                <input type="text" class="inpt" name="tags" placeholder="Comma separated">
+            </div>
+            <div class="modal-inpt">
+                <label for="Description">description</label>
+                <br>
+                <input type="text-area" class="inpt" name="description" placeholder="Short description of your BuckIt activity">
+            </div>
+            <br>
+            <input type="hidden" name="PersonId" value="{{profile.id}}">
+            <button type="submit" id="submit" class="inpt modal-bttn wide">Add to BuckIt &#10004;</span></button>
+            <button type="button" id="close" class="inpt modal-bttn">Cancel</button>
+        </form>
     </div>
 </div>

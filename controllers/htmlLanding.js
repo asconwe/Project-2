@@ -1,9 +1,18 @@
+var messages = {
+    new: 'User profile successfully created - sign in!',
+    authFailed: 'That username/password combination does not match an account in our database'
+}
+
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        console.log('in landing route');
+        var message = null;
+        if (req.query.m) {
+            var message = messages[req.query.m]
+        }
         res.render('index', {
             style: 'landing',
-            authFailed: false
-        })
+            message: message,
+            status: req.query.m
+        });
     });
 }

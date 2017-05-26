@@ -1,9 +1,17 @@
-.authFailed {
+.message {
     text-align: left;
     font-size: 0.85em;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 7px;
+    margin-bottom: 7px;
+}
+
+.new {
+    color: greenyellow;
+}
+
+.authFailed {
     color: red;
-    text-shadow: 2px white;
-    padding-bottom: 7px;
 }
 
 .inpt.bttn {
