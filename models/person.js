@@ -33,7 +33,9 @@ module.exports = function(sequelize, DataTypes) {
     {
       classMethods: {
         associate: function(models) {
-          Person.belongsToMany(models.Activity, {through: 'friends', foreignKey: "personid"});
+          // Person.belongsToMany(models.Activity, {through: 'JoinedActivity', foreignKey: "PersonId"});
+          Person.hasMany(models.Activity);
+          Person.hasMany(models.JoinedActivity);
         }
       }
     }

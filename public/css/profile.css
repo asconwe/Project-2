@@ -1,3 +1,24 @@
+/* h1 is the BuckIt logo */
+
+h2 {
+    font-size: 3em;
+    font-weight: 300;
+}
+
+h3 {
+    font-size: 2em;
+    font-weight: 300;
+}
+
+h4 {
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
+.bkg {
+    opacity: 0.4;
+}
+
 .container.profile {
     position: relative;
 }
@@ -6,7 +27,7 @@
     position: relative;
     padding-top: 15px;
     padding-bottom: 15px;
-    background: rgba(255,255,255, 0.5)
+    background: rgba(30,100,100, 0.5)
 }
 
 .brand.profile {
@@ -39,10 +60,62 @@
     padding: 0 2px 2px 0;
 }
 
-.activity {
+.username.profile {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    color: #333a69;
+    line-height: 0.7em;
+}
+
+
+.bttn {
+    margin: 10px 0;
+    position: relative;
+    background: none;
+    color: #333a69;;
+    border: solid 2px #333a69;;
+    border-radius: 5px;
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 5px;
+    padding: 20px 15px;
+}
+
+.bttn:hover {
+    background: #f5f5ff;
+}
+
+.add-new>.text {
+    margin-left: 40px;
+}
+
+.add-new>.plus {
+    position: absolute;
+    top: 22px;
+    font-size: 1.9em;
+    font-weight: 700;
+    line-height: 0;
+}
+
+.bucket-list {
+    font-weight: 100;
+    color: #333a69;
+}
+
+.category-box {
+    position: relative;
     margin: 15px 0;
     padding: 15px;
+    border: solid 2px #333a69;
+    background: white;
+}
+
+.activity {
+    margin: 15px 0;
+    padding: 15px 0;
     background: rgba(255, 255, 255, 0.8);  
-    border: solid white 2px;
+    border-top: solid #333a69 2px;
+    border-bottom: solid #333a69 2px;
     border-radius: 2px; 
 }

@@ -1,12 +1,28 @@
-.inpt.button {
+.message {
+    text-align: left;
+    font-size: 0.85em;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 7px;
+    margin-bottom: 7px;
+}
+
+.new {
+    color: greenyellow;
+}
+
+.authFailed {
+    color: red;
+}
+
+.inpt.bttn {
     width: 90px;
     background-color: #efffef;
     color: #777;
 }
 
-.inpt.button:hover {
+.inpt.bttn:hover {
     background-color: white;
-    color: gold;
+    color: goldenrod;
 }
 
 .inpt.text {
@@ -129,7 +145,7 @@
         font-size: 1em;
     }
 
-    .inpt.button {
+    .inpt.bttn {
         width: 70px; 
     }
 

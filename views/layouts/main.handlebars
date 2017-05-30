@@ -12,13 +12,12 @@
     <link rel="stylesheet" href="/css/modals.css">
     <script src="/jquery/jquery.min.js"> </script>
     <script src="/javascript/modal.js"> </script>
-
     <title>BuckIt</title>
 </head>
 
 <body>
     <div class="background-container">
-        <img src="/images/scuba.jpg" alt="" class="bkg">
+        <img src="/images/scuba.jpg" alt="Scuba diver near a humpback whale" class="bkg">
     </div>
     <div class="header {{style}}">
         <div class="container {{style}}">
@@ -27,6 +26,7 @@
                     <h1>BuckIt</h1><span class="check {{style}}">&#10004;</span></a>
                 <h3 class="subtext {{style}}"><span>Do&nbsp;stuff&nbsp;--> Make&nbsp;friends</span></h3>
             </div>
+            <h3 class="username {{style}}" data-id="{{profile.id}}">{{profile.username}}</h3>
         </div>
     </div>
     <div class="container {{style}}">{{{body}}}</div>
