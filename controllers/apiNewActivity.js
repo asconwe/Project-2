@@ -7,6 +7,7 @@ module.exports = function (app) {
     activity.complete = false;
     db.Activity.create(activity).then(function (dbActivity) {
       console.log(dbActivity.id);
+      db.TagActivity.create({ ActivityId: dbActivity.id, TagId: req.body.TagId });
       db.JoinedActivity.create({ ActivityId: dbActivity.id, PersonId: req.body.PersonId }).then(function (userAndActivity) {
         // res.json(dbActivity);
         res.redirect('/profile?key=id&val=' + req.body.PersonId);
