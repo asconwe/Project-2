@@ -7,30 +7,61 @@
     <div class="category-box">
         <h3 class="category">Open activities</h3>
         {{#each profile.Activities}} {{#unless this.complete}}
-        <div class="activity open">
+        <div id="activity-{{this.id}}" class="activity open">
             <h3 class="activity-name">{{this.itemName}}</h3>
             <h4 class="activity-location">{{this.location}}</h4>
+            <p class="activity-description">{{this.description}}</p>
+            <h5>Tags:</h5>
+            {{#each this.TagActivities}}
+            <p class="activity-tags">{{this.Tag.tag}}</p>
+            {{/each}}
+            <button class="inpt bttn edit-activity">Edit</button>
+            <div class="activity-friends">
+                {{this.participants}}
+            </div>
         </div>
-        {{/unless}} {{/each}}
-        {{#each profile.joinedActivities}} {{#unless this.complete}}
-        <div class="activity open">
+        {{/unless}} {{/each}} {{#each profile.joinedActivities}} {{#unless this.complete}}
+        <div id="activity-{{this.id}}" class="activity open">
             <h3 class="activity-name">{{this.itemName}}</h3>
             <h4 class="activity-location">{{this.location}}</h4>
+            <p class="activity-description">{{this.description}}</p>
+            {{#each this.TagActivities}}
+            <p class="activity-tags">{{this.Tag.tag}}</p>
+            {{/each}}
+             <button class="inpt bttn leave-activity">Leave Activity</button>
+            <div class="activity-friends">
+                {{this.participants}}
+            </div>
         </div>
         {{/unless}} {{/each}}
     </div>
     <div class="category-box">
         <h3 class="category">Completed activities</h3>
         {{#each profile.Activities}} {{#if this.complete}}
-        <div class="activity complete">
+        <div id="activity-{{this.id}}" class="activity complete">
             <h3 class="activity-name">{{this.itemName}}</h3>
             <h4 class="activity-location">{{this.location}}</h4>
+            <p class="activity-description">{{this.description}}</p>
+            {{#each this.TagActivities}}
+            <p class="activity-tags">{{this.Tag.tag}}</p>
+            {{/each}}
+            <button class="inpt edit-activity">Edit</button>
+            <button class="inpt reopen-activity">Reopen Activity</button>
+            <div class="activity-friends">
+                {{this.participants}}
+            </div>
         </div>
-        {{/if}} {{/each}}
-        {{#each profile.joinedActivites}} {{#if this.complete}}
-        <div class="activity complete">
+        {{/if}} {{/each}} {{#each profile.joinedActivites}} {{#if this.complete}}
+        <div id="activity-{{this.id}}" class="activity complete">
             <h3 class="activity-name">{{this.itemName}}</h3>
             <h4 class="activity-location">{{this.location}}</h4>
+            <p class="activity-description">{{this.description}}</p>
+            {{#each this.TagActivities}}
+            <p class="activity-tags">{{this.Tag.tag}}</p>
+            {{/each}}
+            <div class="activity-friends">
+                {{this.participants}}
+            </div>
         </div>
         {{/if}} {{/each}}
     </div>
@@ -54,7 +85,11 @@
             <div class="modal-inpt">
                 <label for="tags">Tags</label>
                 <br>
-                <input type="text" class="inpt" name="tags" placeholder="Comma separated">
+                {{#each allTags}}
+                <input type="checkbox" class="form-control tag" name="{{allTags.tag}}" value="{{allTags.tag}}" id="{{allTags.tag}}" data-id={{allTags.id}} aria-describedby="...">
+                <label for="{{allTags.tag}}">{{allTags.tag}}</label>
+                {{/each}}
+                <input type="text" class="inpt" id="newTag" placeholder="Add new tag">
             </div>
             <div class="modal-inpt">
                 <label for="Description">description</label>

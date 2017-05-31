@@ -7,6 +7,7 @@ var exphbs = require("express-handlebars");
 //==============Local dependencies
 var db = require("./models");
 var controller = require('./controllers/controller')
+var dummy = require('./dummyData');
 
 //============== Name our server
 var app = express();
@@ -37,5 +38,6 @@ var PORT = process.env.PORT || 3000;
  db.sequelize.sync({ force: true }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
+    dummy();
   });
  });

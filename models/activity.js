@@ -12,9 +12,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       len: [1]
     },
-    tags: {
+    tagId: {
       type: DataTypes.TEXT,
-      allowNull: false,
       len: [1]
     },
     complete: {
@@ -28,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
     {
       classMethods: {
         associate: function(models) {
-          // Activity.belongsToMany(models.Person, {through: 'JoinedActivity', foreignKey: "ActivityId"});
+          Activity.hasMany(models.TagActivity);
           Activity.belongsTo(models.Person);
           Activity.hasMany(models.JoinedActivity);
         }

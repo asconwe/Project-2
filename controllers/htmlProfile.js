@@ -1,30 +1,57 @@
 var db = require("../models");
 
-function getUserProfile(key, val, callback) {
+function getUserProfile(res, key, val, callback) {
     var queryObj = {
         username: { username: val },
         id: { id: val }
     }
-    db.Person.findOne({ where: queryObj[key], include: [{ model: db.Activity }, { model: db.JoinedActivity }] }).then(function (profile) {
-        console.log('Activities ===================================', profile.Activities, profile.JoinedActivities);
-        var joinedActivityIds = [];
-        var activityIds = [];
-        if (profile.Activities != []) {
-            profile.Activities.forEach(function (activity) {
-                activityIds.push(activity.id);
-            })
-            profile.JoinedActivities.forEach(function (activity) {
-                joinedActivityIds.push(activity.id);
-            })
+    db.Person.findOne({
+        where: queryObj[key],
+        include: [{
+            model: db.Activity,
+            include: [{
+                model: db.TagActivity,
+                include: [db.Tag]
+            }]
+        }, {
+            model: db.JoinedActivity,
+              
+        }]
+    }).then(function (profile) {
+        if (profile == null) {
+            res.redirect('/?m=authFailed');
+        } else {
+            var tags = [];
+            var joinedActivityIds = [];
+            var activityIds = [];
+            if (profile != null) {
+                profile.Activities.forEach(function (activity) {
+                    console.log('=========ACTIVITY==========================', activity.TagActivities[0].Tag);
+                    activity.TagActivities.forEach(function (tagObj) { 
+                        tags.push(tagObj)
+                    })
+                    activityIds.push(activity.id);
+                })
+                profile.JoinedActivities.forEach(function (activity) {
+                    joinedActivityIds.push(activity.id);
+                })
+            }
+            db.Activity.findAll({
+                where: {
+                    id: {
+                        $in: joinedActivityIds,
+                        $notIn: activityIds
+                    }
+                },
+                include: [{
+                    model: db.TagActivity,
+                    include: [db.Tag]
+                }]    
+            }).then(function (joinedActivities) {
+                profile.joinedActivities = joinedActivities;
+                callback(profile, tags);
+            });
         }
-        console.log('next')
-        db.Activity.findAll({ where: { id: { $in: joinedActivityIds, $notIn: activityIds } } }).then(function (joinedActivities) {
-            console.log('then')
-            profile.joinedActivities = joinedActivities;
-            console.log('finally')
-            callback(profile);
-        });
-
     })
 }
 
@@ -33,17 +60,14 @@ module.exports = function (app) {
         // /profile?key=username&val=<username>
         // or /profile?key=id&val=<id>
         var val = req.query.val;
-        var key = req.query.key
-        getUserProfile(key, val, function (profile) {
-            if (profile == null) {
-                res.redirect('/?m=authFailed');
-            } else {
-                res.render('profile', {
-                    style: 'profile',
-                    profile: profile
-                });
-            }
-
+        var key = req.query.key;
+        getUserProfile(res, key, val, function (profile, tags) {
+            res.render('profile', {
+                style: 'profile',
+                profile: profile,
+                tags: tags,
+                allTags: []
+            });
         })
     });
 }
