@@ -1,3 +1,4 @@
+<div style="display: none" id="user-id" data-userid="{{userId}}"></div>
 <h3 class="category">Activity Search Results</h3>
 {{#if allActivities}} {{#each activities}} {{#unless this.complete}}
 <div id="activity-{{this.id}}" class="activity open">
@@ -8,7 +9,7 @@
     {{#each this.TagActivities}}
     <p class="activity-tags">{{this.Tag.tag}}</p>
     {{/each}}
-    <button class="inpt bttn join-activity">Join</button>
+    <button class="inpt bttn join-activity" data-id="{{this.id}}">Join</button>
     <div class="activity-friends">
         {{this.participants}}
     </div>

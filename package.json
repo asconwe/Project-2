@@ -28,6 +28,8 @@
     "jquery": "^3.2.1",
     "method-override": "^2.3.8",
     "mysql": "^2.13.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
     "sequelize": "^3.30.4"
   }
 }

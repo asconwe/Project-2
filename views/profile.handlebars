@@ -1,6 +1,8 @@
 <div class="menu">
     <button id="modal-button" class="add-new bttn"><span class="plus">+</span><span class="text">Add to your bucket list!</span></button>
-    <button id="add-activity" class="browse bttn"><span class="text">Browse activities by tag</span></button>
+    <button id="browse-tag-activity" class="browse bttn"><span class="text">Browse activities by tag</span></button>
+    <a href="/allactivities?key=id&id={{profile.id}}"><button id="browse-all-activity" class="browse bttn"><span class="text">Browse all activities</span></button></a>
+
 </div>
 <div class="bucket-list">
     <h2 class="banner">My BuckIt List</h2>
@@ -20,7 +22,9 @@
                 {{this.participants}}
             </div>
         </div>
-        {{/unless}} {{/each}} {{#each profile.joinedActivities}} {{#unless this.complete}}
+        {{/unless}} {{/each}} 
+        
+        {{#each profile.joinedActivities}} {{#unless this.complete}}
         <div id="activity-{{this.id}}" class="activity open">
             <h3 class="activity-name">{{this.itemName}}</h3>
             <h4 class="activity-location">{{this.location}}</h4>
