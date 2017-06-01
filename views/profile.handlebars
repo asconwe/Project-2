@@ -18,7 +18,9 @@
             {{#each this.TagActivities}}
             <p class="activity-tags">{{this.Tag.tag}}</p>
             {{/each}}
-            <br><button class="inpt bttn edit-activity">Edit</button>
+            <br>
+            <button class="inpt bttn chat">Chat</button>
+            <button class="inpt bttn edit-activity">Edit</button>
             <div class="activity-friends">
                 {{this.participants}}
             </div>
@@ -34,7 +36,9 @@
             {{#each this.TagActivities}}
             <p class="activity-tags">{{this.Tag.tag}}</p>
             {{/each}}
-            <br><button class="inpt bttn leave-activity">Leave Activity</button>
+            <br>
+            <button class="inpt bttn chat">Chat</button>
+            <button class="inpt bttn leave-activity">Leave Activity</button>
             <div class="activity-friends">
                 {{this.participants}}
             </div>
@@ -52,7 +56,9 @@
             {{#each this.TagActivities}}
             <p class="activity-tags">{{this.Tag.tag}}</p>
             {{/each}}
-            <br><button class="inpt bttn edit-activity">Edit</button>
+            <br>
+            <button class="inpt bttn chat">Chat</button>
+            <button class="inpt bttn edit-activity">Edit</button>
             <button class="inpt bttn reopen-activity">Reopen Activity</button>
             <div class="activity-friends">
                 {{this.participants}}
@@ -94,13 +100,15 @@
                 <label for="tags">Tags</label>
                 <br>
                 {{#each allTags}}
-                <input type="checkbox" class="form-control tag" name="{{allTags.tag}}" value="{{allTags.tag}}" id="{{allTags.tag}}" data-id={{allTags.id}} aria-describedby="...">
-                <label for="{{allTags.tag}}">{{allTags.tag}}</label>
+                <input type="checkbox" class="form-control tag" name="{{this.tag}}" value="{{this.tag}}" id="{{this.tag}}" data-id={{this.id}} aria-describedby="...">
+                <label for="{{this.tag}}">{{this.tag}}</label><br>
                 {{/each}}
-                <input type="text" class="inpt" id="newTag" placeholder="Add new tag">
+                <br>
+                {{!-- <input type="text" class="inpt" id="newTag" placeholder="Add new tag">
+                <button id="new-tag" class="tag bttn"><span class="text">Add New Tag</span></button> --}}
             </div>
             <div class="modal-inpt">
-                <label for="Description">description</label>
+                <label for="Description">Description</label>
                 <br>
                 <input type="text-area" class="inpt" name="description" placeholder="Short description of your BuckIt activity">
             </div>
