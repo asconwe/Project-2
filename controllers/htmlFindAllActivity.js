@@ -9,16 +9,25 @@ module.exports = function (app) {
 				include: [{
 					model: db.Tag
 				}]
+			}, {
+				model: db.JoinedActivity	
 			}]
-		}).then(function (dballactivities) {
+		}).then(function (dbAllActivities) {
+			dbAllActivities.forEach(function (activity, index) { 
+				dbAllActivities[index].joined = false;
+				activity.JoinedActivities.forEach(function (participant) {
+					if (parseInt(participant.PersonId) === parseInt(userId)) {
+						dbAllActivities[index].joined = true;
+					}
+				});
+			})
 			res.render('activities',
 				{
 					allActivities: true,
-					activities: dballactivities,
+					activities: dbAllActivities,
 					style: 'profile',
-					userId: userId
+					profile: { id: userId }
 				});
-			console.log(dballactivities);
 		});
 
 	});
