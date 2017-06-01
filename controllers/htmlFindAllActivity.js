@@ -15,12 +15,9 @@ module.exports = function (app) {
 		}).then(function (dbAllActivities) {
 			dbAllActivities.forEach(function (activity, index) { 
 				dbAllActivities[index].joined = false;
-				console.log(dbAllActivities[index].joined, '===============');
 				activity.JoinedActivities.forEach(function (participant) {
-					console.log(userId, '=======participant========', participant);
 					if (parseInt(participant.PersonId) === parseInt(userId)) {
 						dbAllActivities[index].joined = true;
-						console.log(dbAllActivities[index].joined)
 					}
 				});
 			})
@@ -29,7 +26,7 @@ module.exports = function (app) {
 					allActivities: true,
 					activities: dbAllActivities,
 					style: 'profile',
-					userId: userId,
+					profile: { id: userId }
 				});
 		});
 
