@@ -30,12 +30,15 @@ function getUserProfile(res, key, val, callback) {
                     activity.TagActivities.forEach(function (tagObj) { 
                         tags.push(tagObj)
                     })
+                    console.log(activity.id);
                     activityIds.push(activity.id);
                 })
                 profile.JoinedActivities.forEach(function (activity) {
-                    joinedActivityIds.push(activity.id);
+                    console.log(activity.ActivityId);
+                    joinedActivityIds.push(activity.ActivityId);
                 })
             }
+            console.log('==================HERE=============', activityIds, joinedActivityIds);
             db.Activity.findAll({
                 where: {
                     id: {
@@ -48,7 +51,9 @@ function getUserProfile(res, key, val, callback) {
                     include: [db.Tag]
                 }]    
             }).then(function (joinedActivities) {
+
                 profile.joinedActivities = joinedActivities;
+                console.log('=============PROFILE====================================', joinedActivities)
                 callback(profile, tags);
             });
         }
