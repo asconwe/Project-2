@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Roboto:100,300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/{{style}}.css">
+    <link rel="stylesheet" href="/css/modals.css">
+    <script src="/jquery/jquery.min.js"> </script>
+    <script src="/javascript/modal.js"> </script>
+    <script src="/javascript/buttons.js"></script>
+    <title>BuckIt</title>
+</head>
+
+<body>
+    <div class="background-container">
+        <img src="/images/scuba.jpg" alt="Scuba diver near a humpback whale" class="bkg">
+    </div>
+    <div class="header {{style}}">
+        <div class="container {{style}}">
+            <div class="brand {{style}}">
+                <a class="logo {{style}}" href="/profile?username={{profile.username}}">
+                    <h1>BuckIt</h1><span class="check {{style}}">&#10004;</span></a>
+                <h3 class="subtext {{style}}"><span>Do&nbsp;stuff&nbsp;--> Make&nbsp;friends</span></h3>
+            </div>
+            <h3 class="username {{style}}" data-id="{{profile.id}}">{{profile.username}}</h3>
+        </div>
+    </div>
+    <div class="container {{style}}">{{{body}}}</div>
+</body>
+
+</html>

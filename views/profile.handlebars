@@ -1,0 +1,109 @@
+<div class="menu">
+    <button id="modal-button" class="add-new bttn"><span class="plus">+</span><span class="text">Add to your bucket list!</span></button>
+    <button id="browse-tag-activity" class="browse bttn"><span class="text">Browse activities by tag</span></button>
+    <a href="/allactivities?key=id&id={{profile.id}}"><button id="browse-all-activity" class="browse bttn"><span class="text">Browse all activities</span></button></a>
+
+</div>
+<div class="bucket-list">
+    <h2 class="banner">My BuckIt List</h2>
+    <div class="category-box">
+        <h3 class="category">Open activities</h3>
+        {{#each profile.Activities}} {{#unless this.complete}}
+        <div id="activity-{{this.id}}" class="activity open">
+            <h3 class="activity-name">{{this.itemName}}</h3>
+            <h4 class="activity-location">{{this.location}}</h4>
+            <p class="activity-description">{{this.description}}</p>
+            <h5>Tags:</h5>
+            {{#each this.TagActivities}}
+            <p class="activity-tags">{{this.Tag.tag}}</p>
+            {{/each}}
+            <button class="inpt bttn edit-activity">Edit</button>
+            <div class="activity-friends">
+                {{this.participants}}
+            </div>
+        </div>
+        {{/unless}} {{/each}} 
+        
+        {{#each profile.joinedActivities}} {{#unless this.complete}}
+        <div id="activity-{{this.id}}" class="activity open">
+            <h3 class="activity-name">{{this.itemName}}</h3>
+            <h4 class="activity-location">{{this.location}}</h4>
+            <p class="activity-description">{{this.description}}</p>
+            {{#each this.TagActivities}}
+            <p class="activity-tags">{{this.Tag.tag}}</p>
+            {{/each}}
+            <button class="inpt bttn leave-activity">Leave Activity</button>
+            <div class="activity-friends">
+                {{this.participants}}
+            </div>
+        </div>
+        {{/unless}} {{/each}}
+    </div>
+    <div class="category-box">
+        <h3 class="category">Completed activities</h3>
+        {{#each profile.Activities}} {{#if this.complete}}
+        <div id="activity-{{this.id}}" class="activity complete">
+            <h3 class="activity-name">{{this.itemName}}</h3>
+            <h4 class="activity-location">{{this.location}}</h4>
+            <p class="activity-description">{{this.description}}</p>
+            {{#each this.TagActivities}}
+            <p class="activity-tags">{{this.Tag.tag}}</p>
+            {{/each}}
+            <button class="inpt edit-activity">Edit</button>
+            <button class="inpt reopen-activity">Reopen Activity</button>
+            <div class="activity-friends">
+                {{this.participants}}
+            </div>
+        </div>
+        {{/if}} {{/each}} {{#each profile.joinedActivites}} {{#if this.complete}}
+        <div id="activity-{{this.id}}" class="activity complete">
+            <h3 class="activity-name">{{this.itemName}}</h3>
+            <h4 class="activity-location">{{this.location}}</h4>
+            <p class="activity-description">{{this.description}}</p>
+            {{#each this.TagActivities}}
+            <p class="activity-tags">{{this.Tag.tag}}</p>
+            {{/each}}
+            <div class="activity-friends">
+                {{this.participants}}
+            </div>
+        </div>
+        {{/if}} {{/each}}
+    </div>
+</div>
+<!--sign up form-->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <form id="addactivityform" class="modal-form" action="/api/activity/new" method="POST">
+            <div class="modal-inpt">
+                <label for="itemName">What is your activity?</label>
+                <br>
+                <input type="text" class="inpt" name="itemName" placeholder="Your activity">
+            </div>
+            <br>
+            <div class="modal-inpt">
+                <label for="location">Location</label>
+                <br>
+                <input type="text" class="inpt" name="location" placeholder="City, State">
+            </div>
+            <br>
+            <div class="modal-inpt">
+                <label for="tags">Tags</label>
+                <br>
+                {{#each allTags}}
+                <input type="checkbox" class="form-control tag" name="{{allTags.tag}}" value="{{allTags.tag}}" id="{{allTags.tag}}" data-id={{allTags.id}} aria-describedby="...">
+                <label for="{{allTags.tag}}">{{allTags.tag}}</label>
+                {{/each}}
+                <input type="text" class="inpt" id="newTag" placeholder="Add new tag">
+            </div>
+            <div class="modal-inpt">
+                <label for="Description">description</label>
+                <br>
+                <input type="text-area" class="inpt" name="description" placeholder="Short description of your BuckIt activity">
+            </div>
+            <br>
+            <input type="hidden" name="PersonId" value="{{profile.id}}">
+            <button type="submit" id="submit" class="inpt modal-bttn wide">Add to BuckIt &#10004;</span></button>
+            <button type="button" id="close" class="inpt modal-bttn">Cancel</button>
+        </form>
+    </div>
+</div>

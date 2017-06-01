@@ -1,0 +1,44 @@
+<div class="entry-fields">
+  <div class="login">
+    {{#if message}}
+    <p class="message {{status}}">{{message}}</p>
+    {{/if}}
+    <h3><span class="label">Login:</span></h3>
+    <form id="login-form" action="/profile" method="GET">
+      <input type="hidden" name="key" value="username">
+      <input class="inpt text" type="text" name="val" placeholder="Username">
+      <input class="inpt bttn" type="submit" value="Go!">
+    </form>
+  </div>
+  <div class="sign-up">
+    <h3><span class="label">Don't have an account yet?</span><a id="modal-button" class="sign-up-a" data-target="#signupmod">Sign up!</a></h3>
+  </div>
+</div>
+
+<!--sign up form-->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <form id="signupform" class="modal-form" action="/api/user/new?username={{profile.username}}" method="POST">
+      <div class="modal-inpt">
+        <label for="email">Email</label>
+        <br>
+        <input type="email" class="inpt" name="userEmail" placeholder="Enter your email">
+      </div>
+      <br>
+      <div class="modal-inpt">
+        <label for="fullname">Full Name</label>
+        <br>
+        <input type="text" class="inpt" name="fullName" placeholder="Please enter Full Name">
+      </div>
+      <br>
+      <div class="modal-inpt">
+        <label for="lastname">Username</label>
+        <br>
+        <input type="text" class="inpt" name="username" placeholder="Choose a Username">
+      </div>
+      <br>
+      <button type="submit" id="submit" class="inpt modal-bttn wide">Join BuckIt &#10004;</span></button>
+      <button type="button" id="close" class="inpt modal-bttn">Cancel</button>
+    </form>
+  </div>
+</div>
