@@ -9,7 +9,7 @@
     {{#each this.TagActivities}}
     <p class="activity-tags">{{this.Tag.tag}}</p>
     {{/each}}
-    <button class="inpt bttn join-activity" data-id="{{this.id}}">Join</button>
+    <button class="inpt bttn join-activity" data-id="{{this.id}}" {{#if this.joined}}disabled{{/if}}>Join{{#if this.joined}}ed!{{/if}}</button>
     <div class="activity-friends">
         {{this.participants}}
     </div>
@@ -25,7 +25,7 @@
     {{#each this.TagActivities}}
     <p class="activity-tags">{{this.Tag.tag}}</p>
     {{/each}}
-    <button class="inpt bttn join-activity">Join</button>
+    <button class="inpt bttn join-activity" data-id="{{this.id}}" {{#if this.joined}}disabled{{/if}}>Join{{#if this.joined}}ed!{{/if}}</button>
     <div class="activity-friends">
         {{this.participants}}
     </div>
