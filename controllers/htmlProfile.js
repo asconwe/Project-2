@@ -23,7 +23,7 @@ function getUserProfile(res, key, val, callback) {
         } else {
             var tags = [];
             var joinedActivityIds = [];
-            var activityIds = [];
+            var activityIds = ['a'];
             if (profile != null) {
                 profile.Activities.forEach(function (activity) {
                     console.log('=========ACTIVITY==========================', activity.TagActivities[0].Tag);
