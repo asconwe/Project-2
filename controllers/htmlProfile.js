@@ -23,17 +23,16 @@ function getUserProfile(res, key, val, callback) {
         } else {
             var tags = [];
             var joinedActivityIds = [];
-            var activityIds = [];
+            var activityIds = ['a'];
             if (profile != null) {
                 profile.Activities.forEach(function (activity) {
-                    console.log('=========ACTIVITY==========================', activity.TagActivities[0].Tag);
                     activity.TagActivities.forEach(function (tagObj) { 
                         tags.push(tagObj)
                     })
                     activityIds.push(activity.id);
                 })
                 profile.JoinedActivities.forEach(function (activity) {
-                    joinedActivityIds.push(activity.id);
+                    joinedActivityIds.push(activity.ActivityId);
                 })
             }
             db.Activity.findAll({
@@ -48,6 +47,7 @@ function getUserProfile(res, key, val, callback) {
                     include: [db.Tag]
                 }]    
             }).then(function (joinedActivities) {
+
                 profile.joinedActivities = joinedActivities;
                 callback(profile, tags);
             });
@@ -56,18 +56,50 @@ function getUserProfile(res, key, val, callback) {
 }
 
 module.exports = function (app) {
-    app.get('/profile', function (req, res) {
-        // /profile?key=username&val=<username>
-        // or /profile?key=id&val=<id>
-        var val = req.query.val;
-        var key = req.query.key;
-        getUserProfile(res, key, val, function (profile, tags) {
-            res.render('profile', {
-                style: 'profile',
-                profile: profile,
-                tags: tags,
-                allTags: []
+//     app.get('/profile', function (req, res) {
+//         // /profile?key=username&val=<username>
+//         // or /profile?key=id&val=<id>
+//         var val = req.query.val;
+//         var key = req.query.key;
+//         getUserProfile(res, key, val, function (profile, tags) {
+//             res.render('profile', {
+//                 style: 'profile',
+//                 profile: profile,
+//                 tags: tags,
+//                 allTags: []
+//             });
+//         })
+//     });
+// }
+    app.get("/profile", function (req, res) {
+        var userId = req.query.id;
+        console.log(userId);
+        db.Tag.findAll({
+            include: [{
+                        model: db.TagActivity,
+                        include: [db.Activity]
+                    }]   
+        }).then(function (dballtags) {
+            var allTags= [];
+            for (i=0; i<dballtags.length; i++) {
+                var object={};
+                object.id=dballtags[i].id;
+                object.tag=dballtags[i].tag;
+                allTags.push(object);
+            }
+            var val = req.query.val;
+             var key = req.query.key;
+            getUserProfile(res, key, val, function (profile, tags) {
+                res.render('profile', {
+                    profile: profile,
+                    allTags: allTags,
+                    style: 'profile',
+                    PersonId: profile.id
+                 });
             });
-        })
+console.log("did it work?");
+console.log(allTags);
+        });
+
     });
 }

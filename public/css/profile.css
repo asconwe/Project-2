@@ -15,6 +15,10 @@ h4 {
     font-weight: 300;
 }
 
+h5 {
+    display: inline;
+}
+
 .bkg {
     opacity: 0.4;
 }
@@ -113,14 +117,33 @@ h4 {
 
 .activity {
     margin: 15px 0;
-    padding: 15px 0;
+    padding: 15px 0 5px 0;
     background: rgba(255, 255, 255, 0.8);  
     border-top: solid #333a69 2px;
     border-bottom: solid #333a69 2px;
     border-radius: 2px; 
+    color: black;
+    font-weight: 500;
+    line-height: 1.3em;
+}
+
+.activity-name {
+    line-height: 0.5em;
+    display: inline;
+}
+
+.activity-location {
+    float: right;
+    line-height: 1.2em;
+    padding-left: 5px;
 }
 
 .activity-description {
-    color: #11220f;
+    color: black;
     font-weight: 300;
+    padding-top: 5px;
+}
+
+.activity-tags {
+    display: inline;
 }
