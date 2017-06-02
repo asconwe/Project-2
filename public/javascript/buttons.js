@@ -17,7 +17,7 @@ $(document).ready(function () {
   //leave activity not as creator: destory row in activity table 
   $(".leave-activity").click(function (e) {
     e.preventDefault();
-    $.post("/api/personactivity/leave", { ActivityId: req.body.ActivityId, PersonId: req.body.PersonId }, function (result) {
+    $.post("/api/personactivity/leave", function (result) {
       console.log(result);
     });
   });
@@ -25,12 +25,13 @@ $(document).ready(function () {
   //edit activity as creator
   $(".edit-activity").click(function (e) {
     e.preventDefault();
-    $.get("/api/activity/edit/:id", { where: { ActivityId: req.params.ActivityId } }, function (result) {
-      console.log(result);
-      // open the modal
-      // populate fields to edit with the result
-      // html put (with method override)
-    });
+    console.log(this);
+    // $.get("/api/activity/edit/:id", { where: { ActivityId: e.params.ActivityId } }, function (result) {
+    //   console.log(result);
+    //   // open the modal
+    //   // populate fields to edit with the result
+    //   // html put (with method override)
+    // });
   });
 
   //reopen activity as creator
@@ -41,20 +42,14 @@ $(document).ready(function () {
     });
   });
 
-  // //Browse all activities
-  // $("#browse-all-activity").click(function (e) {
-  //   e.preventDefault();
-  //   console.log('hello');
-  //   $.get("/allactivities", function (result) {
-  //     console.log(result);
-  //   });
-  // });
+ 
 
   //Browse activities by tag
-  $("#browse-tag-activity").click(function (e) {
+  $(".search").click(function (e) {
     e.preventDefault();
-    console.log(req.body);
-    $.post("/api/allactivities/:tag", { ActivityId: req.body.ActivityId, PersonId: req.body.PersonId }, function (result) {
+    console.log(e);
+    console.log(this);
+    $.get("/allactivities/one", function (result) {
       console.log(result);
     });
   });

@@ -4,9 +4,9 @@ module.exports = function (app) {
 	app.get("/allactivities/one/:id", function (req, res) {
 		console.log(req.body)
 		var tagId = req.params.id;
-		var userId=req.body.PersonId
-		db.Tag.findAll({ 
-			where: {TagId:tagId},
+		var activityId=req.body.PersonId
+		db.JoinedActivity.findOne({ 
+			where: {TagId:tagId} {ActivityId:activityId}, 
 			include: [{
 				model: db.TagActivity,
 				include: [{
