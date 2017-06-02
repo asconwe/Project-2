@@ -56,21 +56,6 @@ function getUserProfile(res, key, val, callback) {
 }
 
 module.exports = function (app) {
-//     app.get('/profile', function (req, res) {
-//         // /profile?key=username&val=<username>
-//         // or /profile?key=id&val=<id>
-//         var val = req.query.val;
-//         var key = req.query.key;
-//         getUserProfile(res, key, val, function (profile, tags) {
-//             res.render('profile', {
-//                 style: 'profile',
-//                 profile: profile,
-//                 tags: tags,
-//                 allTags: []
-//             });
-//         })
-//     });
-// }
     app.get("/profile", function (req, res) {
         var userId = req.query.id;
         console.log(userId);
