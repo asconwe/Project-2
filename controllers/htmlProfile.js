@@ -28,8 +28,8 @@ function getUserProfile(res, key, val, callback) {
             var activityIds = ['a']; // will store the IDs of any owned activities
             // initialized with 'a' so that it is never passed to sequelize as null and 'a' will never be a joined activity id
             if (profile != null) { // If there is a profile --> Is this necessary?
-                profile.Activities.forEach(function (activity) { 
-                    activity.TagActivities.forEach(function (tagObj) { 
+                profile.Activities.forEach(function (activity) {
+                    activity.TagActivities.forEach(function (tagObj) {
                         tags.push(tagObj) // Add each tag for this activity to the tag array
                     })
                     activityIds.push(activity.id); // Add each activity ID
@@ -49,7 +49,7 @@ function getUserProfile(res, key, val, callback) {
                 include: [{ // Include the tags
                     model: db.TagActivity,
                     include: [db.Tag]
-                }]    
+                }]
             }).then(function (joinedActivities) {
                 // make joinedActivities more acessible for handlebars template
                 profile.joinedActivities = joinedActivities;
@@ -61,21 +61,38 @@ function getUserProfile(res, key, val, callback) {
 
 module.exports = function (app) {
     //================= Listen for get request on profile route
-    app.get('/profile', function (req, res) {
-        /// Requests should always come with a profile key and value
-        // /profile?key=username&val=<username>
-        // or /profile?key=id&val=<id>
-        var val = req.query.val;
-        var key = req.query.key;
-        //================= Get the user's profile
-        getUserProfile(res, key, val, function (profile, tags) {
-            //================= Render the template with the profile data
-            res.render('profile', {
-                style: 'profile',
-                profile: profile,
-                tags: tags,
-                allTags: []
+    app.get("/profile", function (req, res) {
+        var userId = req.query.id;
+        console.log(userId);
+        db.Tag.findAll({
+            include: [{
+                model: db.TagActivity,
+                include: [db.Activity]
+            }]
+        }).then(function (dballtags) {
+            var allTags = [];
+            for (i = 0; i < dballtags.length; i++) {
+                var object = {};
+                object.id = dballtags[i].id;
+                object.tag = dballtags[i].tag;
+                allTags.push(object);
+            }
+            /// Requests should always come with a profile key and value
+            // /profile?key=username&val=<username>
+            // or /profile?key=id&val=<id>
+            var val = req.query.val;
+            var key = req.query.key;
+            //================= Get the user's profile
+            getUserProfile(res, key, val, function (profile, tags) {
+                //================= Render the template with the profile data
+                res.render('profile', {
+                    profile: profile,
+                    allTags: allTags,
+                    style: 'profile',
+                    PersonId: profile.id
+                });
             });
-        })
+        });
+
     });
 }
