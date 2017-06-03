@@ -28,8 +28,13 @@
     "jquery": "^3.2.1",
     "method-override": "^2.3.8",
     "mysql": "^2.13.0",
+<<<<<<< HEAD
+    "sequelize": "^3.30.4",
+    "socket.io": "*"
+=======
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "sequelize": "^3.30.4"
+>>>>>>> f2103cbcf4f8a01aff78819e4abd6107fe692e8d
   }
 }

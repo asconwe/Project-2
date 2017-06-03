@@ -146,4 +146,15 @@ h5 {
 
 .activity-tags {
     display: inline;
+
+}
+#chatbox {
+    display:none;
+    position:fixed;
+    z-index: 1;
+    left:100;
+    top:100;
+    margin-right: auto;
+    margin-left:auto;
+
 }

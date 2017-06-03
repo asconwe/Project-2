@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Socket IO Chat</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<style>
+		body{
+			margin-top:30px;
+
+		}
+		#messageArea{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="userFormArea" class="row">
+			<div class="col-md-12">
+				<form id= "userForm">
+					<div class="form-group">
+						<label>Enter Username</label>
+						<textarea class="form-control" id="username" /></textarea>
+						<br />
+						<input type="submit" class="btn btn-primary" value="Login" />
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="messageArea" class="row">
+			<!-- User Name area -->
+			<div class="col-md-4">
+				<div class="well">
+					<h3>Users Showing </h3>
+					<ul class="list-group" id="users"></ul>
+					</div>
+					<!-- Main Chat area -->
+					<div class="col-md-8">
+						<div class="chat" id="chat"></div>
+
+						<form id="messageForm">
+							<div class="form-group">
+								<label>Enter Your Message</label>
+								<textarea class="form-control" id="message"></textarea>
+								<br />
+								<input type="submit" class="btn btn-primary" value="Send Message" />
+
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</body>
+		</html>
