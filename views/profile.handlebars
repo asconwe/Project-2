@@ -20,7 +20,7 @@
             {{/each}}
             <br>
             <button class="inpt bttn chat" id="activity-{{this.id}}">Chat</button>
-            <button class="inpt bttn edit-activity" id="activity-{{this.id}}">Edit</button>
+            <button class="inpt bttn edit-activity" data-activityid="{{this.id}}">Edit</button>
             <div class="activity-friends">
                 {{this.participants}}
             </div>
@@ -59,8 +59,8 @@
             {{/each}}
             <br>
             <button class="inpt bttn chat">Chat</button>
-            <button class="inpt bttn edit-activity">Edit</button>
-            <button class="inpt bttn reopen-activity">Reopen Activity</button>
+            <button class="inpt bttn edit-activity" data-activityid="{{this.id}}">Edit</button>
+            <button class="inpt bttn reopen-activity" data-activityid="{{this.id}}">Reopen Activity</button>
             <div class="activity-friends">
                 {{this.participants}}
             </div>
@@ -125,32 +125,32 @@
 
 
 <!--Edit Activitity form-->
-<div id="modal" class="modal">
+<div id="edit-modal" class="modal">
     <div class="modal-content">
-        <form id="addactivityform" class="modal-form" action="/api/activity/edit" method="POST">
+        <form id="edit-activity-form" class="modal-form" action="/api/activity/edit/" method="POST">
             <div class="modal-inpt">
                 <label for="itemName">What is your activity?</label>
                 <br>
-                <input type="text" class="inpt" name="itemName" placeholder="Your activity">
+                <input id="edit-name" type="text" class="inpt" name="itemName" placeholder="Your activity">
             </div>
             <br>
             <div class="modal-inpt">
                 <label for="location">Location</label>
                 <br>
-                <input type="text" class="inpt" name="location" placeholder="City, State">
+                <input id="edit-location" type="text" class="inpt" name="location" placeholder="City, State">
             </div>
             <br>
              <div class="modal-inpt">
                 <label for="Description">Description</label>
                 <br>
-                <input type="text-area" class="inpt" name="description" placeholder="Short description">
+                <input id="edit-description" type="text-area" class="inpt" name="description" placeholder="Short description">
             </div>
             <br>
-            <div class="modal-inpt">
+            <div id="edit-tags" class="modal-inpt">
                 <label for="tags">Tags</label>
                 <br>
                 {{#each allTags}}
-                <input type="checkbox" class="form-control tag" name="{{this.tag}}" value="{{this.id}}" id="{{this.tag}}" data-id={{this.id}} aria-describedby="...">
+                <input type="checkbox" class="tag" name="{{this.tag}}" value="{{this.id}}" id="tag-{{this.id}}" data-id={{this.id}} aria-describedby="...">
                 <label for="{{this.tag}}">{{this.tag}}</label><br>
                 {{/each}}
                 <br>
@@ -160,8 +160,8 @@
             <br>
             <hr>
             <input type="hidden" name="PersonId" value="{{profile.id}}">
-            <button type="submit" id="submit" class="inpt modal-bttn wide">Add to BuckIt &#10004;</span></button>
-            <button type="button" id="close" class="inpt modal-bttn">Cancel</button>
+            <button type="submit" id="submit" class="inpt modal-bttn wide">Update activity</span></button>
+            <button type="button" id="close" class="inpt close modal-bttn">Cancel</button>
         </form>
     </div>
 </div>

@@ -1,4 +1,4 @@
-$(document).ready(function () { 
+$(document).ready(function () {
 
   //join activity not as creator: Add ids to person activity table
   $(".join-activity").click(function (e) {
@@ -7,7 +7,7 @@ $(document).ready(function () {
     e.preventDefault();
     var activityId = $(this).data('id');
     var userId = $('#user-id').data('userid');
-    $.post("/api/personactivity", { ActivityId: activityId, PersonId: userId}, function (result) {
+    $.post("/api/personactivity", { ActivityId: activityId, PersonId: userId }, function (result) {
       console.log(result);
       $(self).html('Joined!');
       $(self).attr('disabled', 'disabled');
@@ -25,13 +25,24 @@ $(document).ready(function () {
   //edit activity as creator
   $(".edit-activity").click(function (e) {
     e.preventDefault();
-    console.log(this);
-    // $.get("/api/activity/edit/:id", { where: { ActivityId: e.params.ActivityId } }, function (result) {
-    //   console.log(result);
-    //   // open the modal
-    //   // populate fields to edit with the result
-    //   // html put (with method override)
-    // });
+    var queryUrl = "/api/activity/edit/" + $(this).data('activityid');
+    $.get(queryUrl, function (result) {
+      console.log(result);
+      $('.tag').prop('checked', false);
+      // populate fields to edit with the result
+      $('#edit-name').val(result.itemName);
+      $('#edit-location').val(result.location);
+      $('#edit-description').val(result.description);
+      result.TagActivities.forEach(function (tag) { 
+        console.log(tag);
+        $('#tag-' + tag.TagId).prop('checked', true);
+      })
+      
+      // open the modal
+      $('#edit-modal').show()
+      // html put (with method override)
+      $('#edit-activity-form').attr('action', queryUrl + '?_method=PUT');
+    });
   });
 
   //reopen activity as creator
@@ -41,8 +52,6 @@ $(document).ready(function () {
       console.log(result);
     });
   });
-
- 
 
   //Browse activities by tag
   $(".search").click(function (e) {

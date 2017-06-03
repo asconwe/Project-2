@@ -10,7 +10,7 @@ $(document).ready(function () {
   });
 
   //Close modal
-  $("#close").click(function () {
+  $(".close").click(function () {
     $(".modal").css('display', 'none');
   });
 
