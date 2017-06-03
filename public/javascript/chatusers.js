@@ -9,17 +9,20 @@ $(document).ready(function(){
 					var $userFormArea = $('#userFormArea');
 					var $userForm = $('#userForm');
 					var $users = $('#users');
-					var $username = $('#username');
+					//var $username = $('#username');
+					var $username = $(".username").html();
+					console.log($username);
+				
 
 					$messageForm.submit(function(e){
 						e.preventDefault();
-						console.log("sfasfsd");
 						socket.emit('send message', $message.val());
 						$message.val('');
 					});
 					socket.on('new message', function(data){
-						$chat.append('<div class="well"><strong>'+data.user+ '</strong>: '+data.msg+'</div>');
+						$chat.append('<div class="well"><strong>'+$username+ '</strong>: '+data.msg+'</div>');
 					});
+					
 
 					$userForm.submit(function(e){
 						e.preventDefault();
@@ -41,9 +44,22 @@ $(document).ready(function(){
 					})
 
 
+
 					$(".chat").click(function(){
+						//var $namechat= $("this").attr('id');
+						//console.log($namechat);
+						$("#whole_page").hide();
 						$("#chatbox").show();
-						//$("#whole_page").hide();
-						//$("#chatbox").html('test');
+						//console.log(this);
+
+						//$("#chatroom").append("<h5>"+$namechat+"</h5>");
+						
+
 					});
+					$(".chatback").click(function(){
+						$("#whole_page").show();
+						$("#chatbox").hide();
+
+					});
+
 				});
