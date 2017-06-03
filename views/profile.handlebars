@@ -11,7 +11,7 @@
         {{#each profile.Activities}} {{#unless this.complete}}
         <div id="activity-{{this.id}}" class="activity open own">
             <div class="personId" id="{{this.PersonId}}"></div>
-            <div class="activityId"  id="{{this.id}}"></div>
+            <div class="activityId" id="{{this.id}}"></div>
             <h3 class="activity-name">{{this.itemName}}</h3>
             <h4 class="activity-location">{{this.location}}</h4>
             <hr>
@@ -22,17 +22,17 @@
             {{/each}}
             <br>
             <button class="inpt bttn chat" id="activity-{{this.id}}">Chat</button>
-            <button class="inpt bttn edit-activity" id="activity-{{this.id}}">Edit</button>
+            <button class="inpt bttn edit-activity" data-activityid="{{this.id}}">Edit</button>
             <div class="activity-friends">
                 {{this.participants}}
             </div>
         </div>
-        {{/unless}} {{/each}} 
+        {{/unless}} {{/each}}
         <div style="display: none" id="user-id" data-userid="{{profile.id}}"></div>
         {{#each profile.joinedActivities}} {{#unless this.complete}}
         <div id="activity-{{this.id}}" class="activity open others">
-            
-            <div class="activityId"  id="{{this.id}}"></div>
+
+            <div class="activityId" id="{{this.id}}"></div>
             <h3 class="activity-name">{{this.itemName}}</h3>
             <h4 class="activity-location">{{this.location}}</h4>
             <hr>
@@ -63,8 +63,8 @@
             {{/each}}
             <br>
             <button class="inpt bttn chat">Chat</button>
-            <button class="inpt bttn edit-activity">Edit</button>
-            <button class="inpt bttn reopen-activity">Reopen Activity</button>
+            <button class="inpt bttn edit-activity" data-activityid="{{this.id}}">Edit</button>
+            <button class="inpt bttn reopen-activity" data-activityid="{{this.id}}">Reopen Activity</button>
             <div class="activity-friends">
                 {{this.participants}}
             </div>
@@ -101,7 +101,7 @@
                 <input type="text" class="inpt" name="location" placeholder="City, State">
             </div>
             <br>
-             <div class="modal-inpt">
+            <div class="modal-inpt">
                 <label for="Description">Description</label>
                 <br>
                 <input type="text-area" class="inpt" name="description" placeholder="Short description">
@@ -109,13 +109,11 @@
             <br>
             <div class="modal-inpt">
                 <label for="tags">Tags</label>
-                <br>
-                {{#each allTags}}
-                <input type="checkbox" class="form-control tag" name="{{this.tag}}" value="{{this.id}}" id="{{this.tag}}" data-id={{this.id}} aria-describedby="...">
-                <label for="{{this.tag}}">{{this.tag}}</label><br>
-                {{/each}}
-                <br>
-                {{!-- <input type="text" class="inpt" id="newTag" placeholder="Add new tag">
+                <br> {{#each allTags}}
+                <input type="checkbox" class="form-control tag" name="{{this.tag}}" value="{{this.id}}" id="{{this.tag}}" data-id={{this.id}}
+                    aria-describedby="...">
+                <label for="{{this.tag}}">{{this.tag}}</label><br> {{/each}}
+                <br> {{!-- <input type="text" class="inpt" id="newTag" placeholder="Add new tag">
                 <button id="new-tag" class="tag bttn"><span class="text">Add New Tag</span></button> --}}
             </div>
             <br>
@@ -144,7 +142,7 @@
                 <input id="edit-location" type="text" class="inpt" name="location" placeholder="City, State">
             </div>
             <br>
-             <div class="modal-inpt">
+            <div class="modal-inpt">
                 <label for="Description">Description</label>
                 <br>
                 <input id="edit-description" type="text-area" class="inpt" name="description" placeholder="Short description">
@@ -152,13 +150,10 @@
             <br>
             <div id="edit-tags" class="modal-inpt">
                 <label for="tags">Tags</label>
-                <br>
-                {{#each allTags}}
+                <br> {{#each allTags}}
                 <input type="checkbox" class="tag" name="{{this.tag}}" value="{{this.id}}" id="tag-{{this.id}}" data-id={{this.id}} aria-describedby="...">
-                <label for="{{this.tag}}">{{this.tag}}</label><br>
-                {{/each}}
-                <br>
-                {{!-- <input type="text" class="inpt" id="newTag" placeholder="Add new tag">
+                <label for="{{this.tag}}">{{this.tag}}</label><br> {{/each}}
+                <br> {{!-- <input type="text" class="inpt" id="newTag" placeholder="Add new tag">
                 <button id="new-tag" class="tag bttn"><span class="text">Add New Tag</span></button> --}}
             </div>
             <br>
@@ -180,8 +175,7 @@
                 <br>
                 <div style="display: none" id="user-id" data-userid="{{profile.id}}"></div>
                 {{#each allTags}}
-                <a href="/allactivities/tag/{{this.id}}"><button type="submit" class="inpt modal-bttn bttn search tagsearch search" id="{{this.id}}" value={{this.tag}}>Any {{this.tag}}</button></a><br>
-                {{/each}}
+                <a href="/allactivities/tag/{{this.id}}"><button type="submit" class="inpt modal-bttn bttn search tagsearch search" id="{{this.id}}" value={{this.tag}}>Any {{this.tag}}</button></a><br>                {{/each}}
                 <br>
                 <hr>
                 <input type="hidden" name="PersonId" value="{{profile.id}}">
@@ -193,14 +187,16 @@
 
 <div id="exit-modal" class="modal">
     <div class="modal-content">
-        <form id="leave-activity-form" class="modal-form" action="/api/activity/leave/" method="Delete">
+        <form id="leave-activity-form" class="modal-form" action="/api/activity/leave/" method="POST">
             <div class="modal-inpt">
                 <p> Do you wish to exit the following activity?</p>
                 <p id="itemName"></p>
             </div>
             <br>
             <div class="modal-inpt">
-            <button type="submit" id="leavebutton" class="inpt modal-bttn bttn">Leave</span></button><a> &nbsp;
-            <button type="button" id="close" class="inpt modal-bttn bttn">Cancel</button>
+                <input type="submit" id="leavebutton" class="inpt modal-bttn bttn" value="Leave"> &nbsp;
+                <button type="button" id="close" class="inpt modal-bttn bttn">Cancel</button>
             </div>
         </form>
+    </div>
+</div>
