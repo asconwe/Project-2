@@ -1,4 +1,4 @@
-$(document).ready(function () { 
+$(document).ready(function () {
 
   //join activity not as creator: Add ids to person activity table
   $(".join-activity").click(function (e) {
@@ -7,7 +7,7 @@ $(document).ready(function () {
     e.preventDefault();
     var activityId = $(this).data('id');
     var userId = $('#user-id').data('userid');
-    $.post("/api/personactivity", { ActivityId: activityId, PersonId: userId}, function (result) {
+    $.post("/api/personactivity", { ActivityId: activityId, PersonId: userId }, function (result) {
       console.log(result);
       $(self).html('Joined!');
       $(self).attr('disabled', 'disabled');
@@ -17,7 +17,7 @@ $(document).ready(function () {
   //leave activity not as creator: destory row in activity table 
   $(".leave-activity").click(function (e) {
     e.preventDefault();
-    $.post("/api/personactivity/leave", { ActivityId: req.body.ActivityId, PersonId: req.body.PersonId }, function (result) {
+    $.post("/api/personactivity/leave", function (result) {
       console.log(result);
     });
   });
@@ -25,11 +25,23 @@ $(document).ready(function () {
   //edit activity as creator
   $(".edit-activity").click(function (e) {
     e.preventDefault();
-    $.get("/api/activity/edit/:id", { where: { ActivityId: req.params.ActivityId } }, function (result) {
+    var queryUrl = "/api/activity/edit/" + $(this).data('activityid');
+    $.get(queryUrl, function (result) {
       console.log(result);
-      // open the modal
+      $('.tag').prop('checked', false);
       // populate fields to edit with the result
+      $('#edit-name').val(result.itemName);
+      $('#edit-location').val(result.location);
+      $('#edit-description').val(result.description);
+      result.TagActivities.forEach(function (tag) { 
+        console.log(tag);
+        $('#tag-' + tag.TagId).prop('checked', true);
+      })
+      
+      // open the modal
+      $('#edit-modal').show()
       // html put (with method override)
+      $('#edit-activity-form').attr('action', queryUrl + '?_method=PUT');
     });
   });
 
@@ -41,20 +53,12 @@ $(document).ready(function () {
     });
   });
 
-  // //Browse all activities
-  // $("#browse-all-activity").click(function (e) {
-  //   e.preventDefault();
-  //   console.log('hello');
-  //   $.get("/allactivities", function (result) {
-  //     console.log(result);
-  //   });
-  // });
-
   //Browse activities by tag
-  $("#browse-tag-activity").click(function (e) {
+  $(".search").click(function (e) {
     e.preventDefault();
-    console.log(req.body);
-    $.post("/api/allactivities/:tag", { ActivityId: req.body.ActivityId, PersonId: req.body.PersonId }, function (result) {
+    console.log(e);
+    console.log(this);
+    $.get("/allactivities/one", function (result) {
       console.log(result);
     });
   });

@@ -19,8 +19,8 @@
             <p class="activity-tags">{{this.Tag.tag}}</p>
             {{/each}}
             <br>
-            <button class="inpt bttn chat" id="activity-{{this.id}}">Chat</button>
-            <button class="inpt bttn edit-activity" data-activityid="{{this.id}}">Edit</button>
+            <button class="inpt bttn chat">Chat</button>
+            <button class="inpt bttn edit-activity">Edit</button>
             <div class="activity-friends">
                 {{this.participants}}
             </div>
@@ -59,8 +59,8 @@
             {{/each}}
             <br>
             <button class="inpt bttn chat">Chat</button>
-            <button class="inpt bttn edit-activity" data-activityid="{{this.id}}">Edit</button>
-            <button class="inpt bttn reopen-activity" data-activityid="{{this.id}}">Reopen Activity</button>
+            <button class="inpt bttn edit-activity">Edit</button>
+            <button class="inpt bttn reopen-activity">Reopen Activity</button>
             <div class="activity-friends">
                 {{this.participants}}
             </div>
@@ -115,7 +115,6 @@
                 <button id="new-tag" class="tag bttn"><span class="text">Add New Tag</span></button> --}}
             </div>
             <br>
-            <hr>
             <input type="hidden" name="PersonId" value="{{profile.id}}">
             <button type="submit" id="submit" class="inpt modal-bttn wide">Add to BuckIt &#10004;</span></button>
             <button type="button" id="close" class="inpt modal-bttn">Cancel</button>
@@ -123,65 +122,25 @@
     </div>
 </div>
 
-
-<!--Edit Activitity form-->
-<div id="edit-modal" class="modal">
-    <div class="modal-content">
-        <form id="edit-activity-form" class="modal-form" action="/api/activity/edit/" method="POST">
-            <div class="modal-inpt">
-                <label for="itemName">What is your activity?</label>
-                <br>
-                <input id="edit-name" type="text" class="inpt" name="itemName" placeholder="Your activity">
-            </div>
-            <br>
-            <div class="modal-inpt">
-                <label for="location">Location</label>
-                <br>
-                <input id="edit-location" type="text" class="inpt" name="location" placeholder="City, State">
-            </div>
-            <br>
-             <div class="modal-inpt">
-                <label for="Description">Description</label>
-                <br>
-                <input id="edit-description" type="text-area" class="inpt" name="description" placeholder="Short description">
-            </div>
-            <br>
-            <div id="edit-tags" class="modal-inpt">
-                <label for="tags">Tags</label>
-                <br>
-                {{#each allTags}}
-                <input type="checkbox" class="tag" name="{{this.tag}}" value="{{this.id}}" id="tag-{{this.id}}" data-id={{this.id}} aria-describedby="...">
-                <label for="{{this.tag}}">{{this.tag}}</label><br>
-                {{/each}}
-                <br>
-                {{!-- <input type="text" class="inpt" id="newTag" placeholder="Add new tag">
-                <button id="new-tag" class="tag bttn"><span class="text">Add New Tag</span></button> --}}
-            </div>
-            <br>
-            <hr>
-            <input type="hidden" name="PersonId" value="{{profile.id}}">
-            <button type="submit" id="submit" class="inpt modal-bttn wide">Update activity</span></button>
-            <button type="button" id="close" class="inpt close modal-bttn">Cancel</button>
-        </form>
-    </div>
-</div>
-
 <!--Search by Activity form-->
 <div id="modal2" class="modal">
     <div class="modal-content">
-        <form id="browsebytag" class="modal-form" action="/api/allactivities/one/:tag" method="GET">
+        <form id="browsebytag" class="modal-form" action="/api/allactivities/:tag" method="GET">
+            
             <div class="modal-inpt">
                 <label for="tags"><h4>Search:Type of Activity</h4></label>
                 <br>
                 {{#each allTags}}
-                <a href="/allactivities/one?key=tag&id={{this.id}}"><button type="button" class="inpt modal-bttn bttn search" id="{{this.id}}" value={{this.tag}}>Any {{this.tag}}</button></a><br>
+{{!--                 <input type="radio" class="form-control searchtag" name="search" value="{{this.tag}}" id="{{this.tag}}" data-id={{this.id}} aria-describedby="...">
+                <label for="{{this.tag}}">{{this.tag}}</label><br> --}}
+
+                <button type="button" class="inpt modal-bttn bttn search" id="{{this.tag}}">Any {{this.tag}}</button><br>
                 {{/each}}
                 <br>
                 <hr>
-                <input type="hidden" name="PersonId" value="{{profile.id}}">
-                <a href="/allactivities/one?key=tag&val={{tag.id}}"><button type="submit" id="tagsearch" class="inpt modal-bttn bttn">Search</span></button><a> &nbsp;
-                <button type="button" id="close" class="inpt modal-bttn bttn">Cancel</button>
-            </div>
+            <input type="hidden" name="PersonId" value="{{profile.id}}">
+            <a href="/allactivities/one/tag?key=id&id={{tag.id}}"><button type="submit" id="tagsearch" class="inpt modal-bttn bttn">Search</span></button><a> &nbsp;
+            <button type="button" id="close" class="inpt modal-bttn bttn">Cancel</button>
         </form>
     </div>
 </div>

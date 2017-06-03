@@ -1,39 +1,38 @@
 var db = require("../models");
 
 module.exports = function (app) {
-	//================= Listen for get requests on the /allactivities route
-	app.get("/allactivities", function (req, res) {
-		// get the userId from req.query
-		var userId = req.query.id;
-		//================= Get all activities, their tags and there joinedActivities
-		db.Activity.findAll({
+	app.get("/allactivities/one/:id", function (req, res) {
+		console.log(req.body)
+		var tagId = req.params.id;
+		var activityId = req.body.PersonId
+		db.JoinedActivity.findOne({
+			where: { TagId: tagId, ActivityId: activityId },
 			include: [{
 				model: db.TagActivity,
 				include: [{
-					model: db.Tag
+					model: db.JoinedActivity
 				}]
-			}, {
-				model: db.JoinedActivity	
 			}]
 		}).then(function (dbAllActivities) {
 			dbAllActivities.forEach(function (activity, index) {
-				//================= If the user has already joined an acivity, mark it as joined
 				dbAllActivities[index].joined = false;
 				activity.JoinedActivities.forEach(function (participant) {
 					if (parseInt(participant.PersonId) === parseInt(userId)) {
 						dbAllActivities[index].joined = true;
 					}
 				});
-			});
-			//================= Render activities page with all activities and the user id
+			})
 			res.render('activities',
 				{
 					allActivities: true,
 					activities: dbAllActivities,
 					style: 'profile',
-					profile: { id: userId }
+					profile: { id: userId },
+					tag: { id: tagId }
 				});
 		});
 
 	});
 }
+
+
