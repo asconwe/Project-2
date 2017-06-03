@@ -45,7 +45,8 @@ $(document).ready(function () {
   //edit activity as creator
   $(".edit-activity").click(function (e) {
     e.preventDefault();
-    var queryUrl = "/api/activity/edit/" + $(this).data('activityid');
+    var queryUrl = "/api/activity/edit/" + $('.activityId').attr('id');
+    console.log(queryUrl);
     $.get(queryUrl, function (result) {
       console.log(result);
       $('.tag').prop('checked', false);
