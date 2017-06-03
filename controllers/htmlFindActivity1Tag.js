@@ -1,17 +1,18 @@
 var db = require("../models");
 
 module.exports = function (app) {
-	app.get("/allactivities/one/:id", function (req, res) {
-		console.log(req.body)
-		var tagId = req.params.id;
-		var userId=req.body.PersonId
-		db.Tag.findAll({ 
-			where: {TagId:tagId},
+	app.get("/allactivities/:id", function (req, res) {
+		console.log(req.body);
+		var tagId=req.params.id;
+		var userId = req.query.id;
+		db.Activity.findAll({
 			include: [{
-				model: db.TagActivity,
+				model: db.TagActivity, where: {Tagid:tagId},
 				include: [{
-					model: db.JoinedActivity
+					model: db.Tag
 				}]
+			}, {
+				model: db.JoinedActivity	
 			}]
 		}).then(function (dbAllActivities) {
 			dbAllActivities.forEach(function (activity, index) { 
@@ -22,14 +23,13 @@ module.exports = function (app) {
 					}
 				});
 			})
-			res.render('activities',
+			res.render('activitiesone',
 				{
 					allActivities: true,
 					activities: dbAllActivities,
 					style: 'profile',
 					profile: { id: userId },
-					tag: {id:tagId}
-				});
+					});
 		});
 
 	});
