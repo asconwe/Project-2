@@ -14,24 +14,55 @@ $(document).ready(function () {
     });
   });
 
-  //leave activity not as creator: destory row in activity table 
+
   $(".leave-activity").click(function (e) {
     e.preventDefault();
-    $.post("/api/personactivity/leave", function (result) {
-      console.log(result);
-    });
-  });
+    var section=$(this).parent().children(".activity-name").html();
+    var itemName=$(this).parent().children(".activity-name").html();
+    var location=$(this).parent().children(".activity-location").html();
+    var description=$(this).parent().children(".activity-description").html();
+    var personId=$("#user-id").attr('data-userid');
+    var activityId=$(this).parent().children(".activityId").attr('id');
+console.log(personId);
+console.log(itemName);
+console.log(location);
+console.log(description);
+console.log(activityId);
+
+
+    // $("#leave").css('display', 'inline');
+    var url="/api/personactivity/leave/"+ personId + "/"+activityId;
+    console.log(url);
+    $.ajax({
+      url: url,
+      type: 'DELETE', 
+      success: function(){
+        window.location.replace('/profile?key=id&val=' + personId);
+      }
+  });    
+});
 
   //edit activity as creator
   $(".edit-activity").click(function (e) {
     e.preventDefault();
-    console.log(this);
-    // $.get("/api/activity/edit/:id", { where: { ActivityId: e.params.ActivityId } }, function (result) {
-    //   console.log(result);
-    //   // open the modal
-    //   // populate fields to edit with the result
-    //   // html put (with method override)
-    // });
+    var queryUrl = "/api/activity/edit/" + $(this).data('activityid');
+    $.get(queryUrl, function (result) {
+      console.log(result);
+      $('.tag').prop('checked', false);
+      // populate fields to edit with the result
+      $('#edit-name').val(result.itemName);
+      $('#edit-location').val(result.location);
+      $('#edit-description').val(result.description);
+      result.TagActivities.forEach(function (tag) { 
+        console.log(tag);
+        $('#tag-' + tag.TagId).prop('checked', true);
+      })
+      
+      // open the modal
+      $('#edit-modal').show()
+      // html put (with method override)
+      $('#edit-activity-form').attr('action', queryUrl + '?_method=PUT');
+    });
   });
 
   //reopen activity as creator
@@ -47,10 +78,18 @@ $(document).ready(function () {
   //Browse activities by tag
   $(".search").click(function (e) {
     e.preventDefault();
-    console.log(e);
-    console.log(this);
-    $.get("/allactivities/one", function (result) {
+    console.log(this.id);
+    var tagId=this.id;
+    console.log(tagId);
+    var profile=$("#user-id").attr('data-userid');
+    var url="/allactivities/"+tagId+"?key=id&id="+profile;
+    console.log(url);
+    console.log($("#user-id").attr('data-userid'));
+    console.log($(location).attr('href'));
+      $.get(url, function (result) {
       console.log(result);
+      window.location.replace(url);
     });
   });
-})
+});
+  
