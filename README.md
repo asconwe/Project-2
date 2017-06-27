@@ -1,11 +1,6 @@
-# Project 2
-The second project
+# BuckIt
+Do stuf --> Make Friends
 
 ## Proposal
-### Bucket List
-Make a bucket list and accomplish it with others 
+Share your bucket list with your friends, team up to accomplish activities, or just keep track of the adventures you want to take!
 
-## Requirements
-MySQL/ORM: save bucket list data in database
-GET/POST: 
-New Library: possibly socket.io
